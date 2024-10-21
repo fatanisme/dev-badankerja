@@ -23,7 +23,8 @@ class CompanyResource extends Resource
     protected static ?string $model = Company::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Data Management';
+    protected static ?string $navigationGroup = 'Jobs';
+    protected static ?int $navigationSort = 3;
     public static function form(Form $form): Form
     {
         return $form
@@ -31,7 +32,8 @@ class CompanyResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255)
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->unique(),
                 TiptapEditor::make('description')->columnSpanFull()->maxContentWidth('full')->output(TiptapOutput::Html),
                 CuratorPicker::make('media_id')->label('Logo')->size('sm'),
             ]);

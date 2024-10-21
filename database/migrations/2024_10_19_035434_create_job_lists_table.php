@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('job_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
             $table->string('location')->nullable();
             $table->string('salary')->nullable();
             $table->string('slug')->nullable();
             $table->longText('description')->nullable();
             $table->foreignId('job_type_id')->nullable()->constrained('job_types')->nullOnDelete();
-            $table->foreignId('job_category_id')->nullable()->constrained('job_categories')->nullOnDelete();
             $table->foreignId('company_id')->nullable()->constrained('companies')->nullOnDelete();
+            $table->json('job_category_ids')->nullable();
+            $table->json('job_position_ids')->nullable();
             $table->timestamps();
         });
     }

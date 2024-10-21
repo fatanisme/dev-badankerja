@@ -17,6 +17,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Rupadana\ApiService\ApiServicePlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -28,6 +29,10 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login()
+            ->registration()
+            ->passwordReset()
+            ->emailVerification()
+            ->profile()
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -55,6 +60,8 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                ApiServicePlugin::make(),
                 \Awcodes\Curator\CuratorPlugin::make()
                     ->label('Media')
                     ->pluralLabel('Media')
@@ -64,7 +71,6 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationCountBadge()
                     ->registerNavigation(false)
                     ->defaultListView('grid' || 'list'),
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
             ]);
     }
 }
