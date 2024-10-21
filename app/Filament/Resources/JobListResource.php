@@ -144,7 +144,7 @@ class JobListResource extends Resource
                     }),
                 Tables\Columns\TextColumn::make('jobType.name')->label('Job Type'),
                 Tables\Columns\TextColumn::make('location')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('salary')->sortable(),
+                Tables\Columns\TextColumn::make('salary')->label('Salary')->sortable(),
                 Tables\Columns\TextColumn::make('slug'),
             ])
             ->filters([])
